@@ -128,3 +128,69 @@ console.log(swordsman.destroy()); // Sir Mustachio was removed from the game.
 // * Create Villain and Hero constructor functions that inherit from the Humanoid constructor function.
 // * Give the Hero and Villains different methods that could be used to remove health points from objects which could result in destruction if health gets to 0 or drops below 0;
 // * Create two new objects, one a villain and one a hero and fight it out with methods!
+
+
+function Villain(att){
+  Humanoid.call(this, att)
+  this.evil = att.evil
+  this.city = att.city
+}
+
+Villain.prototype = Object.create(Humanoid.prototype)
+Villain.prototype.evilPlan = function(){
+  return `${this.name} is plotting to destroy ${this.city}.`
+}
+Villain.prototype.bigMistake = function(){
+  return `What an idiot! ${this.name} is giving an absurdly long monologue instead of pressing the button, giving the Hero time to plan.`
+}
+
+function Hero(att){
+  Humanoid.call(this, att)
+  this.good = att.good
+  this.city = att.city
+}
+
+Hero.prototype = Object.create(Humanoid.prototype)
+Hero.prototype.batSignal = function(){
+  return `${this.name} has been alerted that a Villain is present in ${this.city}.`
+}
+Hero.prototype.exile = function(){
+  return `${this.name} picks the Villain up by his underwear and sends them hurdling through space into the sun. Yeah, my Hero kills.`
+}
+
+const batman = new Hero({
+  createdAt: new Date(),
+  dimensions: {
+    length: 2,
+    width: 1,
+    height: 6
+  },
+  healthPoints: 20,
+  name: "Bruce Wayne",
+  team: "Gotham",
+  weapons: "Batarang",
+  language: "English",
+  city: "Gotham",
+  good: "65%",
+});
+
+const joker = new Villain({
+  createdAt: new Date(),
+  dimensions: {
+    length: 2,
+    width: 2,
+    height: 5
+  },
+  healthPoints: 12,
+  name: "The Joker",
+  team: "Gotham Underbelly",
+  weapons: "Bomb",
+  language: "English",
+  city: "Gotham",
+  evil: "98%",
+});
+
+console.log(joker.evilPlan())
+console.log(batman.batSignal())
+console.log(joker.bigMistake())
+console.log(batman.exile())
