@@ -134,6 +134,7 @@ function Villain(att){
   Humanoid.call(this, att)
   this.evil = att.evil
   this.city = att.city
+  this.enemy = att.enemy
 }
 
 Villain.prototype = Object.create(Humanoid.prototype)
@@ -141,13 +142,14 @@ Villain.prototype.evilPlan = function(){
   return `${this.name} is plotting to destroy ${this.city}.`
 }
 Villain.prototype.bigMistake = function(){
-  return `What an idiot! ${this.name} is giving an absurdly long monologue instead of pressing the button, giving the Hero time to plan.`
+  return `What an idiot! ${this.name} is giving an absurdly long monologue instead of using ${this.weapons}, giving ${this.enemy} time to plan.`
 }
 
 function Hero(att){
   Humanoid.call(this, att)
   this.good = att.good
   this.city = att.city
+  this.enemy = att.enemy
 }
 
 Hero.prototype = Object.create(Humanoid.prototype)
@@ -155,7 +157,7 @@ Hero.prototype.batSignal = function(){
   return `${this.name} has been alerted that a Villain is present in ${this.city}.`
 }
 Hero.prototype.exile = function(){
-  return `${this.name} picks the Villain up by his underwear and sends them hurdling through space into the sun. Yeah, my Hero kills.`
+  return `${this.name} picks ${this.enemy} up by his underwear and sends ${this.enemy} hurdling through space into the sun. Yeah, ${this.name} kills.`
 }
 
 const batman = new Hero({
@@ -172,6 +174,7 @@ const batman = new Hero({
   language: "English",
   city: "Gotham",
   good: "65%",
+  enemy: "The Joker",
 });
 
 const joker = new Villain({
@@ -188,6 +191,7 @@ const joker = new Villain({
   language: "English",
   city: "Gotham",
   evil: "98%",
+  enemy: "Batman",
 });
 
 console.log(joker.evilPlan())
